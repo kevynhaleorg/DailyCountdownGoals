@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { RouteModule } from './route/route.module';
@@ -25,7 +25,9 @@ import { CapitalizefirstPipe } from './capitalizefirst.pipe';
   imports: [
     BrowserModule,
     CommonModule,
-    RouteRoutingModule
+    RouteRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
