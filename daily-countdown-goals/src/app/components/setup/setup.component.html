@@ -25,8 +25,8 @@
       <input
         type="password"
         class="form-control"
-        id="confirmPassword"
         placeholder="Confirm Password"
+        [appErrorHighlight]="form.isError(form.CONFIRM_PASSWORD)"
         [formControlName]="form.CONFIRM_PASSWORD"
         [formGroup]="formGroup">
   </div>
@@ -36,9 +36,8 @@
     <input
       type="number"
       class="form-control"
-      id="days"
-      aria-describedby="daysHelp"
       placeholder="Enter # of Days."
+      [appErrorHighlight]="form.isError(form.DAYS)"
       [formControlName]="form.DAYS"
       [formGroup]="formGroup">
     <small id="emailHelp" class="form-text text-muted">This is the number of days that your tranformation will take place.</small>

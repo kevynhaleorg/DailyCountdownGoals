@@ -13,6 +13,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { CapitalizefirstPipe } from './capitalizefirst.pipe';
 import { AuthService } from './services/auth/auth.service';
 import { ErrorComponent } from './components/error/error.component';
+import { ErrorHighlightDirective } from './components/error/error-highlight.directive';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ErrorComponent } from './components/error/error.component';
     ResumeComponent,
     BreadcrumbComponent,
     CapitalizefirstPipe,
-    ErrorComponent
+    ErrorComponent,
+    ErrorHighlightDirective
   ],
   imports: [
     BrowserModule,
