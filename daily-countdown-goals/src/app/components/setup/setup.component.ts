@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { PasswordValidation } from './password-validation';
+import { SetupFormValidation } from './../error/setup-form-validation';
 
 @Component({
   selector: 'app-setup',
@@ -9,16 +9,20 @@ import { PasswordValidation } from './password-validation';
 })
 export class SetupComponent implements OnInit {
 
-  form: FormGroup;
+  formGroup: FormGroup;
+  form: SetupFormValidation;
+
 
   constructor(private fb: FormBuilder) {
-    this.form = fb.group({
+    this.form = new SetupFormValidation()
+    console.log(this.form.isAnyError())
+    this.formGroup = fb.group({
       email: new FormControl(),
       password: new FormControl(),
       confirmPassword: new FormControl(),
       days: new FormControl()
     }, {
-      validator: PasswordValidation.MatchPassword // your validation method
+      validator: (ac) => this.form.validate(ac)
     })
   }
 
@@ -26,7 +30,6 @@ export class SetupComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("hello")
     console.log(this.form);
   }
 

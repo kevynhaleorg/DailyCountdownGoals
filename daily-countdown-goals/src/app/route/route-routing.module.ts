@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from '../app.component';
-import { StartComponent } from '../start/start.component';
-import { SetupComponent } from '../setup/setup.component';
-import { ResumeComponent } from '../resume/resume.component';
+import { StartComponent } from '../components/start/start.component';
+import { SetupComponent } from '../components/setup/setup.component';
+import { ResumeComponent } from '../components/resume/resume.component';
 
 const routes: Routes = [
   {

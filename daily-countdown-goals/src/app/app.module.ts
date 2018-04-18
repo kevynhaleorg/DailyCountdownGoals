@@ -4,13 +4,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { RouteModule } from './route/route.module';
-import { StartComponent } from './start/start.component';
+import { StartComponent } from './components/start/start.component'
 import { RouteRoutingModule } from './route/route-routing.module';
 import { CommonModule } from '@angular/common';
-import { SetupComponent } from './setup/setup.component';
-import { ResumeComponent } from './resume/resume.component';
+import { SetupComponent } from './components/setup/setup.component';
+import { ResumeComponent } from './components/resume/resume.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { CapitalizefirstPipe } from './capitalizefirst.pipe';
+import { AuthService } from './services/auth/auth.service';
+import { ErrorComponent } from './components/error/error.component';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { CapitalizefirstPipe } from './capitalizefirst.pipe';
     SetupComponent,
     ResumeComponent,
     BreadcrumbComponent,
-    CapitalizefirstPipe
+    CapitalizefirstPipe,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,7 @@ import { CapitalizefirstPipe } from './capitalizefirst.pipe';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
