@@ -1,5 +1,6 @@
 import { ErrorFormValidation } from './error-form-validation'
 import { AbstractControl } from '@angular/forms';
+import { AuthService } from '../../services/auth/auth.service';
 
 export class SetupFormValidation extends ErrorFormValidation {
 
@@ -8,12 +9,16 @@ export class SetupFormValidation extends ErrorFormValidation {
     public static CONFIRM_PASSWORD: string = 'confirmPassword';
     public static DAYS: string = 'days';
 
-    constructor() {
+    authService:AuthService;
+
+    constructor(authService: AuthService) {
         super(
-            SetupFormValidation.EMAIL,
-            SetupFormValidation.PASSWORD,
-            SetupFormValidation.CONFIRM_PASSWORD,
-            SetupFormValidation.DAYS)
+            { name: SetupFormValidation.EMAIL, required: true },
+            { name: SetupFormValidation.PASSWORD, required: true },
+            { name: SetupFormValidation.CONFIRM_PASSWORD, required: true },
+            { name: SetupFormValidation.DAYS, required: true })
+
+        this.authService = authService
         
     }
 
@@ -46,5 +51,14 @@ export class SetupFormValidation extends ErrorFormValidation {
             super.getErrorManager(SetupFormValidation.DAYS).push("Number of days cannot be greater than 10.")
         }
         
+    }
+
+    submitValidate(AC: AbstractControl) {
+        super.submitValidate(AC)
+
+        if (this.authService.doesUserExist(AC.get(SetupFormValidation.EMAIL).value))
+        {
+            super.getErrorManager(SetupFormValidation.EMAIL).push("User already exists with email.")
+        }
     }
 }

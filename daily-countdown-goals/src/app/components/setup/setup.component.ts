@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { SetupFormValidation } from './../error/setup-form-validation';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-setup',
@@ -13,9 +14,8 @@ export class SetupComponent implements OnInit {
   form: SetupFormValidation;
 
 
-  constructor(private fb: FormBuilder) {
-    this.form = new SetupFormValidation()
-    console.log(this.form.isAnyError())
+  constructor(private fb: FormBuilder, private authService: AuthService) {
+    this.form = new SetupFormValidation(authService)
     this.formGroup = fb.group({
       email: new FormControl(),
       password: new FormControl(),
@@ -30,7 +30,14 @@ export class SetupComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form);
+    this.form.submitValidate(this.formGroup)
+    this.formGroup.get("email")
+    if (!this.form.isAnyError()) {
+      this.authService.create(
+        this.formGroup.get(this.form.EMAIL).value,
+        this.formGroup.get(this.form.PASSWORD).value,
+        this.formGroup.get(this.form.DAYS).value)
+    } 
   }
 
 }

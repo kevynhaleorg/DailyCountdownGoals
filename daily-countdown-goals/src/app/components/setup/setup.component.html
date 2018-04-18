@@ -4,20 +4,21 @@
     <input
       type="email"
       class="form-control"
-      id="email"
-      aria-describedby="emailHelp"
       placeholder="Enter email"
+      [appErrorHighlight]="form.isError(form.EMAIL)"
       [formControlName]="form.EMAIL">
   </div>
+  <app-error [errorChange]="form.getErrorManager(form.EMAIL).error$"></app-error>
   <div class="form-group">
     <label for="inputPassword1">Password</label>
     <input
       type="password"
       class="form-control"
-      id="password"
       placeholder="Password"
+      [appErrorHighlight]="form.isError(form.PASSWORD)"
       [formControlName]="form.PASSWORD">
   </div>
+  <app-error [errorChange]="form.getErrorManager(form.PASSWORD).error$"></app-error>
   <div class="form-group">
       <label for="inputPassword2">Confirm Password</label>
       <input

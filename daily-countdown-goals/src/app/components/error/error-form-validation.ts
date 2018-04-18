@@ -2,16 +2,16 @@ import {Observer} from 'rxjs/Observer'
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/share';
 import { ErrorManager } from './error-manager'
-import {AbstractControl} from '@angular/forms';
+import {AbstractControl, FormControl} from '@angular/forms';
 
 
 export abstract class ErrorFormValidation {
 
     fields: ErrorChangeMap[] = []
 
-    constructor( ...fields: string[]) {
+    constructor( ...fields: any[]) {
         fields.forEach(field => {
-            this.fields.push(new ErrorChangeMap(field, new ErrorManager()))
+            this.fields.push(new ErrorChangeMap(field.name, field.required, new ErrorManager()))
         })
     }
 
@@ -49,16 +49,27 @@ export abstract class ErrorFormValidation {
     }
 
     abstract validate(AC: AbstractControl);
+
+    submitValidate(AC: AbstractControl) {
+        this.fields.forEach(field => {
+            if (AC.get(field.name).value == null && field.required) {
+                field.errorManager.push(`${field.name.toUpperCase()} is required.`)
+            }
+        })
+    }
+
     
 
 }
 
 class ErrorChangeMap {
-    name: String;
+    name: string;
+    required: boolean;
     errorManager: ErrorManager;
 
-    constructor(name: string, errorManager: ErrorManager) {
+    constructor(name: string, required: boolean, errorManager: ErrorManager) {
        this.name = name
+       this.required = required
        this.errorManager = errorManager
         
     }
