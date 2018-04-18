@@ -7,8 +7,7 @@
       id="email"
       aria-describedby="emailHelp"
       placeholder="Enter email"
-      [formControlName]="form.EMAIL"
-      [formGroup]="formGroup">
+      [formControlName]="form.EMAIL">
   </div>
   <div class="form-group">
     <label for="inputPassword1">Password</label>
@@ -17,8 +16,7 @@
       class="form-control"
       id="password"
       placeholder="Password"
-      [formControlName]="form.PASSWORD"
-      [formGroup]="formGroup">
+      [formControlName]="form.PASSWORD">
   </div>
   <div class="form-group">
       <label for="inputPassword2">Confirm Password</label>
@@ -27,8 +25,7 @@
         class="form-control"
         placeholder="Confirm Password"
         [appErrorHighlight]="form.isError(form.CONFIRM_PASSWORD)"
-        [formControlName]="form.CONFIRM_PASSWORD"
-        [formGroup]="formGroup">
+        [formControlName]="form.CONFIRM_PASSWORD">
   </div>
   <app-error [errorChange]="form.getErrorManager(form.CONFIRM_PASSWORD).error$"></app-error>
   <div class="form-group">
