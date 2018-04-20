@@ -11,7 +11,8 @@ export class ErrorManager {
 
 	constructor() {
     	this.error$ = new Observable(observer =>
-     	this._errorObserver = observer).share();
+		 this._errorObserver = observer).share();
+		 console.log("This is the error observer", this._errorObserver)
 	}
 
 	clear() {

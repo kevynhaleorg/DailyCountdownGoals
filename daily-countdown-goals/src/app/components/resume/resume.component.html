@@ -1,15 +1,27 @@
-<form>
+<form [formGroup]="form.formGroup">
     <app-error [errorChange]="authService.errorManager.error$"></app-error>
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <input
+        type="email"
+        class="form-control"
+        placeholder="Enter email"
+        [appErrorHighlight]="form.isError(form.EMAIL)"
+        [formControlName]="form.EMAIL">
     </div>
+    <app-error [errorChange]="form.getErrorManager(form.EMAIL).error$"></app-error>
     <div class="form-group">
       <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Password"
+        [appErrorHighlight]="form.isError(form.PASSWORD)"
+        [formControlName]="form.PASSWORD">
     </div>
+    <app-error [errorChange]="form.getErrorManager(form.PASSWORD).error$"></app-error>
     <div class="form-group">
-      <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
+      <button type="submit" class="btn btn-primary" [disabled]="form.isAnyError()" (click)="submit()">Submit</button>
     </div>
 </form>
   

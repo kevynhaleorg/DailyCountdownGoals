@@ -14,6 +14,10 @@ import { CapitalizefirstPipe } from './capitalizefirst.pipe';
 import { AuthService } from './services/auth/auth.service';
 import { ErrorComponent } from './components/error/error.component';
 import { ErrorHighlightDirective } from './components/error/error-highlight.directive';
+import { HeaderComponent } from './components/header/header.component';
+import { LoggedInComponent } from './components/logged-in/logged-in.component';
+import { LoggedOutComponent } from './components/logged-out/logged-out.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
@@ -25,7 +29,11 @@ import { ErrorHighlightDirective } from './components/error/error-highlight.dire
     BreadcrumbComponent,
     CapitalizefirstPipe,
     ErrorComponent,
-    ErrorHighlightDirective
+    ErrorHighlightDirective,
+    HeaderComponent,
+    LoggedInComponent,
+    LoggedOutComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

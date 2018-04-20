@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container large-padding">
+            <h1 class="display-4">Daily Countdown Goals</h1>
+            <p class="lead">The app that helps you set awesome goals every day.</p>
+            <hr class="my-4">
+            <app-breadcrumb [crumbs]="crumbs" *ngIf="showBreadcrumbs"></app-breadcrumb>
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>

@@ -2,21 +2,36 @@ import {Observer} from 'rxjs/Observer'
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/share';
 import { ErrorManager } from './error-manager'
-import {AbstractControl, FormControl} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, FormBuilder} from '@angular/forms';
 
 
 export abstract class ErrorFormValidation {
 
     fields: ErrorChangeMap[] = []
+    formGroup: FormGroup;
 
     constructor( ...fields: any[]) {
         fields.forEach(field => {
             this.fields.push(new ErrorChangeMap(field.name, field.required, new ErrorManager()))
         })
+
+        let group: any = {};
+
+        this.fields.map(field => {
+            group[field.name] = new FormControl()
+        })
+
+        this.formGroup = new FormBuilder().group(group, {
+            validator: (ac) => this.validate(ac)
+          })
     }
 
     isAnyError(): boolean {
         return this.fields.filter(field => field.errorManager.errors.length > 0).length > 0
+    }
+
+    getValue(field: string) {
+        return this.formGroup.get(field).value
     }
 
     getErrorManager(fieldName: string): ErrorManager {
@@ -48,18 +63,20 @@ export abstract class ErrorFormValidation {
         return this.fields.filter( field => field.name === fieldName)
     }
 
-    abstract validate(AC: AbstractControl);
+    validate(AC: AbstractControl) {
+        this.clearAll()
+        this.validateInternal(AC)
+    }
 
-    submitValidate(AC: AbstractControl) {
+    abstract validateInternal(AC: AbstractControl)
+
+    submitValidate() {
         this.fields.forEach(field => {
-            if (AC.get(field.name).value == null && field.required) {
-                field.errorManager.push(`${field.name.toUpperCase()} is required.`)
+            if (this.formGroup.get(field.name).value == null && field.required) {
+                field.errorManager.push(`${field.name} is required.`)
             }
         })
     }
-
-    
-
 }
 
 class ErrorChangeMap {

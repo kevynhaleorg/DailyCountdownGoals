@@ -8,17 +8,7 @@ import { ActivatedRoute, UrlSegment, Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  showBreadcrumbs: boolean = false;
-  crumbs: string[];
-
-  constructor(private router: Router) {
-    router.events.subscribe((url:any) => {
-      if (url.url)
-      {
-        this.showBreadcrumbs = url.url === "/start" || url.url === "/" ? false : true;
-        this.crumbs = url.url.slice(1).split("/")
-      }
-    });
+  constructor() {
 
   }
 

@@ -1,4 +1,4 @@
-<form [formGroup]="formGroup">
+<form [formGroup]="form.formGroup">
   <div class="form-group">
     <label for="inputEmail1">Email address</label>
     <input
@@ -36,10 +36,9 @@
       class="form-control"
       placeholder="Enter # of Days."
       [appErrorHighlight]="form.isError(form.DAYS)"
-      [formControlName]="form.DAYS"
-      [formGroup]="formGroup">
+      [formControlName]="form.DAYS">
     <small id="emailHelp" class="form-text text-muted">This is the number of days that your tranformation will take place.</small>
   </div>
   <app-error [errorChange]="form.getErrorManager(form.DAYS).error$"></app-error>
-  <button type="submit" class="btn btn-primary" [formGroup]="formGroup" [disabled]="form.isAnyError()" (click)="onSubmit()" >Submit</button>
+  <button type="submit" class="btn btn-primary" [formGroup]="form.formGroup" [disabled]="form.isAnyError()" (click)="onSubmit()" >Submit</button>
 </form>

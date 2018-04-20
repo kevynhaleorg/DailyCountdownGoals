@@ -38,7 +38,7 @@ export class SetupFormValidation extends ErrorFormValidation {
         return SetupFormValidation.DAYS;
     }
 
-    validate(AC: AbstractControl) {
+    validateInternal(AC: AbstractControl) {
         super.clearAll()
         const password = AC.get(SetupFormValidation.PASSWORD).value;
         const confirmPassword = AC.get(SetupFormValidation.CONFIRM_PASSWORD).value;
@@ -53,10 +53,10 @@ export class SetupFormValidation extends ErrorFormValidation {
         
     }
 
-    submitValidate(AC: AbstractControl) {
-        super.submitValidate(AC)
+    submitValidate() {
+        super.submitValidate()
 
-        if (this.authService.doesUserExist(AC.get(SetupFormValidation.EMAIL).value))
+        if (this.authService.doesUserExist(this.formGroup.get(SetupFormValidation.EMAIL).value))
         {
             super.getErrorManager(SetupFormValidation.EMAIL).push("User already exists with email.")
         }
